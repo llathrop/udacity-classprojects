@@ -1,0 +1,83 @@
+	
+	
+	//map the cube textur onto the tardis, one texture per side
+	var textureTardis =  THREE.ImageUtils.loadTexture( 'media/img/TARDIS_Cube___bottom_by_Blue_Storm_Spirit.png' );
+	
+	
+	
+	textureTardis.wrapS = textureTardis.wrapT = THREE.RepeatWrapping;
+	
+	textureTardis.repeat.set( 2, 4);
+	textureTardis.needsUpdate=true;
+	
+	var tardisMaterialArray = [];
+	tardisMaterialArray.push( new THREE.MeshBasicMaterial( { map: textureTardis, side: THREE.DoubleSide } ));
+	tardisMaterialArray.push( new THREE.MeshBasicMaterial( { map: textureTardis, side: THREE.DoubleSide } ));
+	tardisMaterialArray.push( new THREE.MeshBasicMaterial( { map: textureTardis, side: THREE.DoubleSide } ));
+	tardisMaterialArray.push( new THREE.MeshBasicMaterial( { map: textureTardis, side: THREE.DoubleSide } ));
+	tardisMaterialArray.push( new THREE.MeshBasicMaterial( { map: textureTardis, side: THREE.DoubleSide } ));
+	tardisMaterialArray.push( new THREE.MeshBasicMaterial( { map: textureTardis, side: THREE.DoubleSide } ));
+
+	var material = new THREE.MeshFaceMaterial(tardisMaterialArray);
+	
+	
+	
+	
+	
+	//stack of stuff at top of tardis
+	var geometry = new THREE.BoxGeometry( 25, 2, 25 );
+    boxTopLayerBottom = new THREE.Mesh( geometry, material );
+	boxTopLayerBottom.position.y= 26;
+	tardis.add( boxTopLayerBottom);
+	
+	var geometry = new THREE.BoxGeometry( 23, 2, 23 );
+    boxTopLayerTop = new THREE.Mesh( geometry, material );
+	boxTopLayerTop.position.y= 28;
+	tardis.add( boxTopLayerTop);
+	
+	var geometry = new THREE.BoxGeometry( 7, 2, 7 );
+    boxTopLayerPedastal = new THREE.Mesh( geometry, material );
+	boxTopLayerPedastal.position.y= 30;
+	tardis.add( boxTopLayerPedastal);
+	
+	var material = new THREE.MeshBasicMaterial( { color: 0x102372 } );
+	var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+    boxTopLight = new THREE.Mesh( geometry, material );
+	boxTopLight.position.y= 32;
+	tardis.add( boxTopLight);
+	
+	
+//Particle Engine setup:
+    var settings = {
+		positionStyle  : Type.CUBE,
+		positionBase   : new THREE.Vector3( 0, 0, 0 ),
+		positionSpread : new THREE.Vector3( 100, 100, 100 ),
+
+		velocityStyle  : Type.CUBE,
+		velocityBase   : new THREE.Vector3( 800, 800, 00 ),
+		velocitySpread : new THREE.Vector3( 40, 40, 80 ), 
+		
+		angleBase               : 0,
+		angleSpread             : 720,
+		angleVelocityBase       : 10,
+		angleVelocitySpread     : 0,
+       
+      particleTexture : THREE.ImageUtils.loadTexture( 'media/img/smokeparticle.png' ),
+  
+  		sizeBase    : 32.0,
+		sizeSpread  : 2.0,				
+		colorBase   : new THREE.Vector3(0.15, 1.0, 0.8), // H,S,L
+		opacityBase : 1,
+		blendStyle  : THREE.AdditiveBlending,
+
+		particlesPerSecond : 500,
+		particleDeathAge   : 10.0,		
+		emitterDeathAge    : 120
+     };
+	engine = new ParticleEngine();
+	engine.setValues( settings );
+	engine.initialize();
+}
+
+//PArticle Engine - at end of render:
+	engine.update( delta * 0.5 );
