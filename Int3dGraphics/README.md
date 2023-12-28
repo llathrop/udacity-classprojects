@@ -1,4 +1,4 @@
-https://llathrop.github.io/udacity-classprojects/Int3dGraphics/tardis/
+[tardis](https://llathrop.github.io/udacity-classprojects/Int3dGraphics/tardis/)
 
-https://llathrop.github.io/udacity-classprojects/Int3dGraphics/pinewood/
+[pinewood](https://llathrop.github.io/udacity-classprojects/Int3dGraphics/pinewood/)
 
